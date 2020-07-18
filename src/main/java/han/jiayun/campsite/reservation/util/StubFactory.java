@@ -1,4 +1,4 @@
-package han.jiayun.campsite.reservation.controllers;
+package han.jiayun.campsite.reservation.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,13 +15,13 @@ import han.jiayun.campsite.reservation.model.UserInfo;
  * @author Jiayun Han
  *
  */
-public final class ModelStub {
+public final class StubFactory {
 	
-	private ModelStub() {}
+	private StubFactory() {}
 	
-	static final ConfirmedReservation ORIGINAL_RESERVATION;
-	static final ConfirmedReservation MODIFIED_RESERVATION;
-	static final List<FromTo> OPEN_DATES;
+	public static final ConfirmedReservation ORIGINAL_RESERVATION;
+	public static final ConfirmedReservation MODIFIED_RESERVATION;
+	public static final List<FromTo> OPEN_DATES;
 	
 	static {
 		

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.util.StubFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -35,7 +36,7 @@ public class ReservationController {
 			@ApiResponse(code = 406, message = "Invalid date range"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<?> getAvailableDates(@RequestParam Optional<String> from, @RequestParam Optional<String> to) {		
-		return ResponseEntity.ok().body(ModelStub.OPEN_DATES);
+		return ResponseEntity.ok().body(StubFactory.OPEN_DATES);
 	}
 	
 	@PostMapping
@@ -50,7 +51,7 @@ public class ReservationController {
 	public ResponseEntity<?> makeReservation(@RequestBody RequestedReservation request) {
 		return ResponseEntity
 				.created(URI.create("http://localhost:9999/reservations/bd23951e-deab-4227-b42f-157392ba2fcf"))
-				.body(ModelStub.ORIGINAL_RESERVATION);
+				.body(StubFactory.ORIGINAL_RESERVATION);
 	}
 
 	@GetMapping("/{id}")
@@ -60,7 +61,7 @@ public class ReservationController {
 			@ApiResponse(code = 404, message = "Reservation not found"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<?> getReservation(@PathVariable String id) {
-		return ResponseEntity.ok(ModelStub.ORIGINAL_RESERVATION);
+		return ResponseEntity.ok(StubFactory.ORIGINAL_RESERVATION);
 	}
 
 	@DeleteMapping("/{id}")
