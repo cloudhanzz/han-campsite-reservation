@@ -4,9 +4,7 @@ import java.util.List;
 
 import han.jiayun.campsite.reservation.annotation.Required;
 import han.jiayun.campsite.reservation.exceptions.MissRequiredValuesException;
-import han.jiayun.campsite.reservation.model.DesiredDates;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
-import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.util.ReflectionTool;
 
 /**
@@ -15,21 +13,12 @@ import han.jiayun.campsite.reservation.util.ReflectionTool;
  * @author Jiayun Han
  *
  */
-public final class MissingValueChecker {
+public final class MissingValueChecker implements Validator {
     
-    public void preCheck(RequestedReservation request) {
-		
+    public void check(RequestedReservation request) {		
     	checkMissingFields(request);    	
-    	checkUser(request.getUser());    	
-    	checkDates(request.getDates());
-	}
-	
-	public void checkUser(UserInfo user) {		
-		checkMissingFields(user);
-	}
-	
-    public void checkDates(DesiredDates dates) {
-    	checkMissingFields(dates);
+    	checkMissingFields(request.getUser());    	
+    	checkMissingFields(request.getDates());
 	}
 
 	private void checkMissingFields(Object request) {

@@ -37,7 +37,7 @@ public class MissingValueCheckerTest {
 		request.setDates(new DesiredDates(arrival, departure));
 		request.setUser(user);
 
-		checker.preCheck(request);
+		checker.check(request);
 	}
 
 	@DisplayName("Test user information is not provided")
@@ -51,7 +51,7 @@ public class MissingValueCheckerTest {
 		RequestedReservation request = new RequestedReservation();
 		request.setDates(new DesiredDates(arrival, departure));
 
-		assertThrows(MissRequiredValuesException.class, () -> checker.preCheck(request));
+		assertThrows(MissRequiredValuesException.class, () -> checker.check(request));
 	}
 
 	@DisplayName("Test dates information is not provided")
@@ -61,6 +61,6 @@ public class MissingValueCheckerTest {
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
 
-		assertThrows(MissRequiredValuesException.class, () -> checker.preCheck(request));
+		assertThrows(MissRequiredValuesException.class, () -> checker.check(request));
 	}
 }
