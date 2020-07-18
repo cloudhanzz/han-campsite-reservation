@@ -1,3 +1,4 @@
+.attach_pid*
 *.cmd
 mvnw
 *~
