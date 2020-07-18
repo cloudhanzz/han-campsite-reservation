@@ -3,7 +3,7 @@ package han.jiayun.campsite.reservation.controllers;
 import java.net.URI;
 import java.util.Optional;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import han.jiayun.campsite.reservation.availability.AvailabilityChecker;
+import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
+import han.jiayun.campsite.reservation.availability.AvailabilityManager;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.service.impl.ReservationManager;
 import han.jiayun.campsite.reservation.util.StubFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -28,14 +32,26 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping(value = "/camping/v1.0/reservations", produces = "application/json")
 public class ReservationController {
+	
+	@Autowired
+	private AvailabilityFinder availabilityFinder;
+	
+	@Autowired
+	private AvailabilityChecker availabilityChecker;
+	
+	@Autowired
+	private AvailabilityManager availabilityManager; 
+	
+	@Autowired
+	private ReservationManager reservationManager;
 
-	@GetMapping("/available-dates/")
+	@GetMapping("/available/dates")
 	@ApiOperation(value = "Find available dates of a range", response = ResponseEntity.class)
 	@ApiResponses(value = { 
 			@ApiResponse(code = 200, message = "OK"),
 			@ApiResponse(code = 406, message = "Invalid date range"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
-	public ResponseEntity<?> getAvailableDates(@RequestParam Optional<String> from, @RequestParam Optional<String> to) {		
+	public ResponseEntity<?> getAvailableDates(@RequestParam Optional<String> from, @RequestParam Optional<String> to) {
 		return ResponseEntity.ok().body(StubFactory.OPEN_DATES);
 	}
 	
