@@ -27,26 +27,26 @@ public class ReservationController {
 	
 	@GetMapping("/available-dates")
 	public List<FromTo> getAvailableDates() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ModelStub.OPEN_DATES;
 	}
 	
 	@PostMapping
 	public ConfirmedReservation makeReservation(@RequestBody RequestedReservation request) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ModelStub.ORIGINAL_RESERVATION;
 	}
 	
 	@GetMapping("/{id}")
 	public ConfirmedReservation getReservation(@PathVariable String id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ModelStub.ORIGINAL_RESERVATION;
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> cancelReservation(@PathVariable String id) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ResponseEntity.ok().body("You reservation has been cancelled successfully.");
 	}
 	
 	@PatchMapping("/{id}")
 	public ConfirmedReservation modifyReservation(@PathVariable String id, @RequestBody DesiredDates newDates) {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return ModelStub.MODIFIED_RESERVATION;
 	}
 }
