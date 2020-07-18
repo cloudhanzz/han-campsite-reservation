@@ -13,7 +13,7 @@ import han.jiayun.campsite.reservation.util.ReflectionTool;
  * @author Jiayun Han
  *
  */
-public final class MissingValueChecker implements Validator {
+public final class MissingValueChecker implements RequestValidator {
     
     public void check(RequestedReservation request) {		
     	checkMissingFields(request);    	

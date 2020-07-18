@@ -19,7 +19,7 @@ import han.jiayun.campsite.reservation.model.RequestedReservation;
  * @author Jiayun Hans
  *
  */
-public final class ArrivalDateChecker implements Validator {
+public final class ArrivalDateChecker implements RequestValidator {
 
 	private static final int MIN_DAYS_IN_ADVANCE = 1;
 	private static final int MAX_DAYS_IN_ADVANCE = 30;
