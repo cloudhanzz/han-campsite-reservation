@@ -14,14 +14,13 @@ import org.springframework.http.HttpStatus;
 public class InvalidRequestBodyException extends RestException {
 
 	private static final long serialVersionUID = 1L;
-	private static final String note = "Did you miss it or have a typo in the section tag?";
+	private static final String NOTE = "Please ensure provide the correct required information";
 
 	/**
 	 * 
-	 * @param missingParts
-	 *            The names of the missing attributes
+	 * @param message
 	 */
-	public InvalidRequestBodyException(String missingParts) {
-		super("RequestBody contains no " + missingParts, HttpStatus.NOT_ACCEPTABLE, note);
+	public InvalidRequestBodyException(String message) {
+		super("RequestBody contains no " + message, HttpStatus.NOT_ACCEPTABLE, NOTE);
 	}
 }

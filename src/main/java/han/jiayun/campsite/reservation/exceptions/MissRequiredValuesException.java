@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class MissRequiredValuesException extends RestException {
 
-	private static final String NOTE = "Please ensure provide the required information";
+	private static final String NOTE = "Did you miss it or have a typo in the section tag?";
 
 	private static final long serialVersionUID = 1L;
 
