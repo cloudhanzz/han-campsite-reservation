@@ -2,6 +2,7 @@ package han.jiayun.campsite.reservation.model;
 
 import java.time.LocalDate;
 
+import han.jiayun.campsite.reservation.annotation.Required;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,9 @@ import lombok.Setter;
 @Setter
 public class FromTo {
 
+	@Required
 	private LocalDate from;
+	
+	@Required
 	private LocalDate to;
 }
