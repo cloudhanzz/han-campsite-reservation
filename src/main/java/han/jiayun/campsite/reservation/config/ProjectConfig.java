@@ -2,12 +2,10 @@ package han.jiayun.campsite.reservation.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 import han.jiayun.campsite.reservation.service.ValidatingService;
 import han.jiayun.campsite.reservation.validators.ArrivalDateChecker;
@@ -21,11 +19,6 @@ import han.jiayun.campsite.reservation.validators.UserInfoChecker;
  */
 @Configuration
 public class ProjectConfig {
-		
-	@Bean
-	public ReservationRepository reservationRepository() {
-		return () -> new ConcurrentHashMap<>();
-	}
 	
 	@Bean
 	public ValidatingService validatingService() {

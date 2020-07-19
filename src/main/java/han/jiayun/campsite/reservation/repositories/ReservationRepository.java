@@ -1,10 +1,21 @@
 package han.jiayun.campsite.reservation.repositories;
 
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 
-@FunctionalInterface
-public interface ReservationRepository {	
-	Map<String, ConfirmedReservation> reservations();
+public enum ReservationRepository {
+	
+	INSTANCE;
+
+	// reservationID -> reservations
+	private final ConcurrentHashMap<String, ConfirmedReservation> reservations;
+	
+	private ReservationRepository() {
+		this.reservations = new ConcurrentHashMap<>();
+	}
+	
+	public ConcurrentHashMap<String, ConfirmedReservation> reservations() {
+		return reservations;
+	}
 }

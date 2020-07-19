@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidDateRangeException;
@@ -22,9 +21,6 @@ import han.jiayun.campsite.reservation.repositories.ReservationRepository;
  */
 @Service
 public class AvailabilityFinder {
-
-	@Autowired
-	private ReservationRepository reservationRepository;
 
 	public List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd) {
 
@@ -73,11 +69,11 @@ public class AvailabilityFinder {
 
 	private LocalDate findFromDate(LocalDate start, LocalDate end) {
 
-		while (isDateNotAvailable(reservationRepository.reservations(), start) && !start.isEqual(end)) {
+		while (isDateNotAvailable(ReservationRepository.INSTANCE.reservations(), start) && !start.isEqual(end)) {
 			start = start.plusDays(1);
 		}
 
-		if (isDateAvailable(reservationRepository.reservations(), start)) {
+		if (isDateAvailable(ReservationRepository.INSTANCE.reservations(), start)) {
 			return start;
 		}
 
@@ -88,7 +84,7 @@ public class AvailabilityFinder {
 
 		LocalDate to = null;
 
-		while (isDateAvailable(reservationRepository.reservations(), start) && !start.isAfter(end)) {
+		while (isDateAvailable(ReservationRepository.INSTANCE.reservations(), start) && !start.isAfter(end)) {
 			to = start;
 			start = start.plusDays(1);
 		}

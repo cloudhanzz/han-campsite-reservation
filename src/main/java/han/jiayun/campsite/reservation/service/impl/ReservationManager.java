@@ -1,14 +1,9 @@
 package han.jiayun.campsite.reservation.service.impl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import han.jiayun.campsite.reservation.exceptions.ReservationNotFoundException;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.repositories.ReservationRepository;
@@ -16,9 +11,6 @@ import han.jiayun.campsite.reservation.service.ReservationService;
 
 @Service
 public class ReservationManager implements ReservationService {
-
-	@Autowired
-	private ReservationRepository reservationRepository;
 
 	@Override
 	public String createReservation(RequestedReservation request) {
@@ -30,7 +22,7 @@ public class ReservationManager implements ReservationService {
 		reservation.setReservedAt(LocalDateTime.now());
 		
 		String id = reservation.getId();
-		reservationRepository.reservations().put(id, reservation);
+		ReservationRepository.INSTANCE.reservations().put(id, reservation);
 		
 		return id;
 	}
