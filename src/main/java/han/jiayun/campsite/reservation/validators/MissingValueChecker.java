@@ -5,6 +5,7 @@ import java.util.List;
 import han.jiayun.campsite.reservation.annotation.Required;
 import han.jiayun.campsite.reservation.exceptions.MissRequiredValuesException;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.service.RequestValidator;
 import han.jiayun.campsite.reservation.util.ReflectionTool;
 
 /**

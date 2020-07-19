@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import han.jiayun.campsite.reservation.availability.AvailabilityChecker;
 import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.service.ValidatingService;
 import han.jiayun.campsite.reservation.util.StubFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -36,6 +38,12 @@ public class ReservationController {
 		
 	@Autowired
 	private AvailabilityFinder availabilityFinder;
+	
+	@Autowired
+	private ValidatingService validatingService;
+	
+	@Autowired
+	private AvailabilityChecker availabilityChecker;
 
 	@GetMapping("/available/dates")
 	@ApiOperation(value = "Find available dates of a range", response = FromTo.class, responseContainer="List")
@@ -58,6 +66,9 @@ public class ReservationController {
 			@ApiResponse(code = 500, message = "Server failed to perform the operation")
 	})
 	public ResponseEntity<?> makeReservation(@RequestBody RequestedReservation request) {
+		validatingRequest(request);
+		checkAvailability(request);
+		
 		return ResponseEntity
 				.created(URI.create("http://localhost:9999/reservations/bd23951e-deab-4227-b42f-157392ba2fcf"))
 				.body(StubFactory.ORIGINAL_RESERVATION);
@@ -94,5 +105,15 @@ public class ReservationController {
 	})
 	public ResponseEntity<?> modifyReservation(@PathVariable String id, @RequestBody RequestedReservation request) {
 		return ResponseEntity.noContent().build();
+	}
+
+	private void validatingRequest(RequestedReservation request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void checkAvailability(RequestedReservation request) {
+		// TODO Auto-generated method stub
+		
 	}
 }

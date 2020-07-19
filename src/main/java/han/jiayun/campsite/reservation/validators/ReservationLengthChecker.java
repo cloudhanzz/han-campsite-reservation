@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidReservationLengthException;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.service.RequestValidator;
 
 /**
  * Checking the length of the reservation.

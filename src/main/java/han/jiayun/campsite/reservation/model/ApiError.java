@@ -1,4 +1,4 @@
-package han.jiayun.campsite.reservation.exceptions;
+package han.jiayun.campsite.reservation.model;
 
 import java.util.Arrays;
 import java.util.List;

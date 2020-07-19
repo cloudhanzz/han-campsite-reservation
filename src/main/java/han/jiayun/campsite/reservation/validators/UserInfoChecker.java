@@ -7,6 +7,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import han.jiayun.campsite.reservation.exceptions.InvalidRequestBodyException;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.UserInfo;
+import han.jiayun.campsite.reservation.service.RequestValidator;
 
 /**
  * Checking the user of the request contains valid values. This happens after
