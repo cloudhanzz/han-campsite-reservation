@@ -23,7 +23,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerTest {
+@DisplayName("Test resporting available date ranges")
+public class AvailabilityReportTest {
 	
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
