@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
-import han.jiayun.campsite.reservation.model.DesiredDates;
+import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
@@ -34,8 +34,8 @@ public final class StubFactory {
 		
 		UserInfo user = new UserInfo("John", "Doe", "john.doe@gmail.com");
 		
-		DesiredDates originalDates = new DesiredDates(arrival, departure);
-		DesiredDates newDates = new DesiredDates(arrival.plusDays(5), departure.plusDays(5));
+		Schedule originalDates = new Schedule(arrival, departure);
+		Schedule newDates = new Schedule(arrival.plusDays(5), departure.plusDays(5));
 		
 		ORIGINAL_RESERVATION = new ConfirmedReservation();		
 		ORIGINAL_RESERVATION.setDates(originalDates);

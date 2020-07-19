@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import han.jiayun.campsite.reservation.exceptions.ReservationTooSoonOrTooFarAwayException;
-import han.jiayun.campsite.reservation.model.DesiredDates;
+import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 
 @DisplayName("Test Arrival Date Checker")
@@ -63,8 +63,8 @@ public class ArrivalDateCheckerTest {
 		LocalDate now = LocalDate.now();
 		LocalDate arrival = now.plusDays(n_days_in_advance);
 		
-		DesiredDates dates = new DesiredDates(arrival, null);
-		request.setDates(dates);
+		Schedule schedule = new Schedule(arrival, null);
+		request.setDates(schedule);
 		return request;
 	}	
 }

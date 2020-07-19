@@ -14,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
-import han.jiayun.campsite.reservation.model.DesiredDates;
+import han.jiayun.campsite.reservation.model.Schedule;
 
 @DisplayName("Test the Availability Tool")
 public class AvailabilityToolTest {
@@ -50,8 +50,8 @@ public class AvailabilityToolTest {
 		
 		
 		ConfirmedReservation r = new ConfirmedReservation();
-		DesiredDates dates = new DesiredDates(day3, day6);
-		r.setDates(dates);
+		Schedule schedule = new Schedule(day3, day6);
+		r.setDates(schedule);
 		r.setReservedAt(LocalDateTime.now());
 		
 		reservations.put(r.getId(), r);

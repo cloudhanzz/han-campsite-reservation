@@ -19,5 +19,5 @@ public class RequestedReservation {
 	private UserInfo user;	
 	
 	@Required
-	private DesiredDates dates;
+	private Schedule dates;
 }

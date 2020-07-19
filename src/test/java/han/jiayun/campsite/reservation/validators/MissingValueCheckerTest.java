@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import han.jiayun.campsite.reservation.exceptions.MissRequiredValuesException;
-import han.jiayun.campsite.reservation.model.DesiredDates;
+import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
@@ -34,7 +34,7 @@ public class MissingValueCheckerTest {
 		LocalDate departure = now.plusDays(12);
 
 		RequestedReservation request = new RequestedReservation();
-		request.setDates(new DesiredDates(arrival, departure));
+		request.setDates(new Schedule(arrival, departure));
 		request.setUser(user);
 
 		checker.check(request);
@@ -49,7 +49,7 @@ public class MissingValueCheckerTest {
 		LocalDate departure = now.plusDays(12);
 
 		RequestedReservation request = new RequestedReservation();
-		request.setDates(new DesiredDates(arrival, departure));
+		request.setDates(new Schedule(arrival, departure));
 
 		assertThrows(MissRequiredValuesException.class, () -> checker.check(request));
 	}

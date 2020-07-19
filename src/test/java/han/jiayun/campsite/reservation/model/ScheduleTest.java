@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Test DesiredDate model")
-public class DesiredDatesTest {
+public class ScheduleTest {
 	
 	@Test
 	@DisplayName("Test converting from arrival and departure dates to actual reserved dates")
@@ -23,8 +23,8 @@ public class DesiredDatesTest {
 		LocalDate day4 = now.plusDays(4);
 		LocalDate day5 = now.plusDays(5);
 		LocalDate departure = arrival.plusDays(3);
-		DesiredDates arrivalDeparture = new DesiredDates(arrival, departure);
-		List<LocalDate> dates = arrivalDeparture.toDiscreteDates();
+		Schedule schedule = new Schedule(arrival, departure);
+		List<LocalDate> dates = schedule.toDiscreteDates();
 		
 		assertAll( "dates should contain from arrival date until (excluding) departure date",
 				() -> assertEquals(3, dates.size()),

@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DesiredDates {
+public class Schedule {
 	
 	@Required
 	private LocalDate arrival;

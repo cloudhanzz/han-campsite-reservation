@@ -26,7 +26,7 @@ public class ConfirmedReservation extends RequestedReservation {
 	private String id;
 	
 	private UserInfo user;	
-	private DesiredDates dates;
+	private Schedule dates;
 
 	@NotCopiable
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")

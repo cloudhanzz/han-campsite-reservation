@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidReservationLengthException;
-import han.jiayun.campsite.reservation.model.DesiredDates;
+import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 
 @DisplayName("Test Reservation Length Checker")
@@ -35,9 +35,9 @@ public class ReservationLengthCheckerTest {
 		LocalDate now = LocalDate.now();
 		LocalDate arrival = now.plusDays(1);
 		LocalDate departure = arrival.minusDays(departure_n_days_before_arrival);
-		DesiredDates dates = new DesiredDates(arrival, departure);	
+		Schedule schedule = new Schedule(arrival, departure);	
 		
-		request.setDates(dates);
+		request.setDates(schedule);
 		
 		assertThrows(InvalidReservationLengthException.class, () -> checker.check(request));
 	}
@@ -52,9 +52,9 @@ public class ReservationLengthCheckerTest {
 		LocalDate now = LocalDate.now();
 		LocalDate arrival = now.plusDays(1);
 		LocalDate departure = arrival.plusDays(4);
-		DesiredDates dates = new DesiredDates(arrival, departure);
+		Schedule schedule = new Schedule(arrival, departure);
 		
-        request.setDates(dates);
+        request.setDates(schedule);
 		
         assertThrows(InvalidReservationLengthException.class, () -> checker.check(request));
 	}
@@ -70,9 +70,9 @@ public class ReservationLengthCheckerTest {
 		LocalDate now = LocalDate.now();
 		LocalDate arrival = now.plusDays(10);
 		LocalDate departure = now.plusDays(12);		
-		DesiredDates dates = new DesiredDates(arrival, departure);	
+		Schedule schedule = new Schedule(arrival, departure);	
 		
-		request.setDates(dates);
+		request.setDates(schedule);
 		
 		checker.check(request);
 	}	
