@@ -1,37 +1,37 @@
 package han.jiayun.campsite.reservation.availability;
 
+import static han.jiayun.campsite.reservation.util.AvailabilityTool.isDateAvailable;
+import static han.jiayun.campsite.reservation.util.AvailabilityTool.isDateNotAvailable;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import han.jiayun.campsite.reservation.model.FromTo;
+import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 
 /**
  * For reporting available date ranges.
  * @author Jiayun Han
  *
  */
-public final class AvailabilityFinder {
+@Service
+public class AvailabilityFinder {
 
-	private final Set<LocalDate> unavailableDates;
+	@Autowired
+	private ReservationRepository reservationRepository;
 
-	public AvailabilityFinder() {
-		this(new HashSet<>());
-	}
+	public List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd) {
 
-	public AvailabilityFinder(Set<LocalDate> unavailableDates) {
-		this.unavailableDates = unavailableDates;
-	}
-
-	public List<FromTo> findAvailableDateRanges() {
-
+		LocalDate now = LocalDate.now();		
+		LocalDate start = optionalStart.orElse(now.plusDays(1));
+		LocalDate end = optionalEnd.orElse(now.plusMonths(1));		
+		
 		List<FromTo> fromTos = new ArrayList<>();
-
-		LocalDate now = LocalDate.now();
-		LocalDate start = now.plusDays(1);
-		LocalDate end = now.plusMonths(1);
 
 		FromTo fromTo = findAvailablePeriod(start, end);
 		if (fromTo != null) {
@@ -68,11 +68,11 @@ public final class AvailabilityFinder {
 
 	private LocalDate findFromDate(LocalDate start, LocalDate end) {
 
-		while (!isDateAvailable(start) && !start.isEqual(end)) {
+		while (isDateNotAvailable(reservationRepository.reservations(), start) && !start.isEqual(end)) {
 			start = start.plusDays(1);
 		}
 
-		if (isDateAvailable(start)) {
+		if (isDateAvailable(reservationRepository.reservations(), start)) {
 			return start;
 		}
 
@@ -83,16 +83,11 @@ public final class AvailabilityFinder {
 
 		LocalDate to = null;
 
-		while (isDateAvailable(start) && !start.isAfter(end)) {
+		while (isDateAvailable(reservationRepository.reservations(), start) && !start.isAfter(end)) {
 			to = start;
 			start = start.plusDays(1);
 		}
 
 		return to;
 	}
-
-	private boolean isDateAvailable(LocalDate date) {
-		return !unavailableDates.contains(date);
-	}
-
 }

@@ -1,6 +1,8 @@
 package han.jiayun.campsite.reservation.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import han.jiayun.campsite.reservation.annotation.Required;
 import lombok.AllArgsConstructor;
@@ -24,5 +26,17 @@ public class DesiredDates {
 	
 	@Required
 	private LocalDate departure;
+	
+	public List<LocalDate> toDiscreteDates() {
+		List<LocalDate> dates = new ArrayList<>();
+
+		LocalDate date = arrival;
+
+		do {
+			dates.add(date);
+			date = date.plusDays(1);
+		} while (date.isBefore(departure));
+		return dates;
+	}
 
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import han.jiayun.campsite.reservation.annotation.NotCopiable;
@@ -36,6 +37,11 @@ public class ConfirmedReservation extends RequestedReservation {
 	
 	@NotCopiable
 	private LocalDateTime cancelledAt;
+	
+	@JsonIgnore
+	public boolean isActive() {
+		return cancelledAt == null;
+	}
 
 	public ConfirmedReservation() {
 		this.id = UUID.randomUUID().toString();
