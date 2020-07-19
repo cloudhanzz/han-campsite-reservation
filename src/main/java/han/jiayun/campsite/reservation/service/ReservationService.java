@@ -7,7 +7,7 @@ import han.jiayun.campsite.reservation.model.RequestedReservation;
 public interface ReservationService {
 	
 	// return reservation ID
-	String createReservation(RequestedReservation requestReservation);
+	String createReservation(RequestedReservation request);
 	
 	boolean cancelReservation(String reservationId);
 	

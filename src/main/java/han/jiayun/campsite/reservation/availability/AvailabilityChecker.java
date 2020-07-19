@@ -22,7 +22,7 @@ public final class AvailabilityChecker {
 	@Autowired
 	private ReservationRepository reservationRepository;
 	
-	public void isUnavailable(List<LocalDate> dates) {
+	public void check(List<LocalDate> dates) {
 		
 		for(LocalDate date : dates) {
 			if(isDateNotAvailable(reservationRepository.reservations(), date)) {

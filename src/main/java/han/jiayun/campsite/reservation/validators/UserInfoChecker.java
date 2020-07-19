@@ -37,7 +37,6 @@ public final class UserInfoChecker implements RequestValidator {
 	 * @param name
 	 */
 	public void checkName(String name, String header) {
-
 		if(!NAME_PATTERN.matcher(name).matches()) {
 			throw new InvalidRequestBodyException("Invalid " + header);
 		}		
@@ -49,7 +48,7 @@ public final class UserInfoChecker implements RequestValidator {
 	 */
 	public void checkEmail(String email) {
 		if(!emailValidator.isValid(email)) {
-			throw new InvalidRequestBodyException("Invalid Email");
+			throw new InvalidRequestBodyException("valid Email");
 		}		
 	}
 }

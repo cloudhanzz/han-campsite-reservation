@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +18,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import han.jiayun.campsite.reservation.availability.AvailabilityChecker;
 import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
+import han.jiayun.campsite.reservation.model.CreationResponse;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.service.ReservationService;
 import han.jiayun.campsite.reservation.service.ValidatingService;
+import han.jiayun.campsite.reservation.util.Messages;
 import han.jiayun.campsite.reservation.util.StubFactory;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -44,6 +49,9 @@ public class ReservationController {
 	
 	@Autowired
 	private AvailabilityChecker availabilityChecker;
+	
+	@Autowired
+	private ReservationService reservationService;
 
 	@GetMapping("/available/dates")
 	@ApiOperation(value = "Find available dates of a range", response = FromTo.class, responseContainer="List")
@@ -65,13 +73,26 @@ public class ReservationController {
 			@ApiResponse(code = 422, message = "Missing required value(s)"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation")
 	})
-	public ResponseEntity<?> makeReservation(@RequestBody RequestedReservation request) {
+	public ResponseEntity<CreationResponse> makeReservation(@RequestBody RequestedReservation request) {
+		
 		validatingRequest(request);
 		checkAvailability(request);
 		
-		return ResponseEntity
-				.created(URI.create("http://localhost:9999/reservations/bd23951e-deab-4227-b42f-157392ba2fcf"))
-				.body(StubFactory.ORIGINAL_RESERVATION);
+		String reservationId = reservationService.createReservation(request);		
+		URI location = buildLocation(reservationId);
+		
+		CreationResponse body = new CreationResponse(reservationId, HttpStatus.CREATED.toString(), Messages.AFTER_MAKING_RESERVATION);
+		
+		return ResponseEntity.created(location).body(body);
+	}
+
+	private URI buildLocation(String reservationId) {
+		
+		return ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(reservationId)
+				.toUri();
 	}
 
 	@GetMapping("/{id}")
@@ -108,12 +129,12 @@ public class ReservationController {
 	}
 
 	private void validatingRequest(RequestedReservation request) {
-		// TODO Auto-generated method stub
+		validatingService.validators().forEach(validator -> validator.check(request));
 		
 	}
 
 	private void checkAvailability(RequestedReservation request) {
-		// TODO Auto-generated method stub
+		availabilityChecker.check(request.getDates().toDiscreteDates());
 		
 	}
 }

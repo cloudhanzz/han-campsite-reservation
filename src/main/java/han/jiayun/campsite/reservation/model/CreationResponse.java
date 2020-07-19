@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiResponse implements Serializable {
+public class CreationResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

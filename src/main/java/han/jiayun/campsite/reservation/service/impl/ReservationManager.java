@@ -17,10 +17,22 @@ import han.jiayun.campsite.reservation.service.ReservationService;
 @Service
 public class ReservationManager implements ReservationService {
 
+	@Autowired
+	private ReservationRepository reservationRepository;
+
 	@Override
-	public String createReservation(RequestedReservation requestReservation) {
-		// TODO Auto-generated method stub
-		return null;
+	public String createReservation(RequestedReservation request) {
+		
+		ConfirmedReservation reservation = new ConfirmedReservation();
+
+		reservation.setDates(request.getDates());
+		reservation.setUser(request.getUser());
+		reservation.setReservedAt(LocalDateTime.now());
+		
+		String id = reservation.getId();
+		reservationRepository.reservations().put(id, reservation);
+		
+		return id;
 	}
 
 	@Override
@@ -40,7 +52,7 @@ public class ReservationManager implements ReservationService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 //	private Map<String, ConfirmedReservation> repository;	
 //
 //	@Autowired
