@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ReservationControllerTest {
+public class ControllerAvailabilityFinderTest {
 	
 	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
