@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import han.jiayun.campsite.reservation.exceptions.InvalidDateRangeException;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 
@@ -29,7 +30,11 @@ public class AvailabilityFinder {
 
 		LocalDate now = LocalDate.now();		
 		LocalDate start = optionalStart.orElse(now.plusDays(1));
-		LocalDate end = optionalEnd.orElse(now.plusMonths(1));		
+		LocalDate end = optionalEnd.orElse(now.plusMonths(1));	
+		
+		if(start.isAfter(end)) {
+			throw InvalidDateRangeException.instance();
+		}
 		
 		List<FromTo> fromTos = new ArrayList<>();
 

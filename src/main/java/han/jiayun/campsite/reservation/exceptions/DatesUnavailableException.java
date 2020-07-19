@@ -21,7 +21,7 @@ public class DatesUnavailableException extends RestException {
 	private static DatesUnavailableException INSTANCE = new DatesUnavailableException(MESSAGE);
 	
 	private DatesUnavailableException(String message) {
-		super(message, HttpStatus.UNPROCESSABLE_ENTITY, NOTE);
+		super(message, HttpStatus.CONFLICT, NOTE);
 	}
 	
 	public static DatesUnavailableException instance() {
