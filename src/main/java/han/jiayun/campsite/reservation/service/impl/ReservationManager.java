@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import han.jiayun.campsite.reservation.exceptions.ReservationNotFoundException;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.repositories.ReservationRepository;
@@ -14,23 +15,31 @@ public class ReservationManager implements ReservationService {
 
 	@Override
 	public String createReservation(RequestedReservation request) {
-		
+
 		ConfirmedReservation reservation = new ConfirmedReservation();
 
 		reservation.setDates(request.getDates());
 		reservation.setUser(request.getUser());
 		reservation.setReservedAt(LocalDateTime.now());
-		
+
 		String id = reservation.getId();
 		ReservationRepository.INSTANCE.reservations().put(id, reservation);
-		
+
 		return id;
 	}
 
 	@Override
 	public boolean cancelReservation(String reservationId) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		ConfirmedReservation reservation = tryFindReservationById(reservationId);
+		
+		try {
+			reservation.setCancelledAt(LocalDateTime.now());
+		} catch (Exception e) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	@Override
@@ -41,8 +50,7 @@ public class ReservationManager implements ReservationService {
 
 	@Override
 	public ConfirmedReservation getReservation(String reservationId) {
-		// TODO Auto-generated method stub
-		return null;
+		return tryFindReservationById(reservationId);
 	}
 
 //	private Map<String, ConfirmedReservation> repository;	
@@ -93,11 +101,11 @@ public class ReservationManager implements ReservationService {
 //		return tryFindReservationById(reservationId);
 //	}
 //
-//	private ConfirmedReservation tryFindReservationById(String reservationId) {
-//		ConfirmedReservation reservation = repository.get(reservationId);		
-//		if(reservation == null || reservation.getCancelledAt() != null) {
-//			throw new ReservationNotFoundException(reservationId, "Please provide the correct reservation identifier");
-//		}
-//		return reservation;
-//	}
+	private ConfirmedReservation tryFindReservationById(String reservationId) {
+		ConfirmedReservation reservation = ReservationRepository.INSTANCE.reservations().get(reservationId);
+		if (reservation == null || reservation.getCancelledAt() != null) {
+			throw new ReservationNotFoundException(reservationId, "Please provide the correct reservation identifier");
+		}
+		return reservation;
+	}
 }
