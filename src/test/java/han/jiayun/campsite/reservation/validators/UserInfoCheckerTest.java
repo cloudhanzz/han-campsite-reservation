@@ -31,7 +31,7 @@ public class UserInfoCheckerTest {
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
 
-		checker.check(request);
+		checker.check(request.getUser(), request.getDates());
 	}
 
 	@DisplayName("Test first name is not valid")
@@ -41,7 +41,7 @@ public class UserInfoCheckerTest {
 		UserInfo user = new UserInfo("33First", "Last", "xyz.abc@xxxx.com");
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
-		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request));
+		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request.getUser(), request.getDates()));
 		assertTrue(ex.getMessage().contains("First Name"));
 	}
 
@@ -52,7 +52,7 @@ public class UserInfoCheckerTest {
 		UserInfo user = new UserInfo("First", "-", "xyz.abc@xxxx.com");
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
-		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request));
+		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request.getUser(), request.getDates()));
 		assertTrue(ex.getMessage().contains("Last Name"));
 	}
 	
@@ -64,8 +64,8 @@ public class UserInfoCheckerTest {
 		UserInfo user = new UserInfo("Jone", "Done", email);
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
-		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request));
-		assertTrue(ex.getMessage().contains("Invalid Email"));
+		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request.getUser(), request.getDates()));
+		assertTrue(ex.getMessage().contains("no valid Email"));
 	}
 	
 	@DisplayName("Test email is valid")
@@ -76,6 +76,6 @@ public class UserInfoCheckerTest {
 		UserInfo user = new UserInfo("Jone", "Done", email);
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
-		checker.check(request);
+		checker.check(request.getUser(), request.getDates());
 	}
 }

@@ -1,6 +1,5 @@
 package han.jiayun.campsite.reservation.controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -10,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.http.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,10 +33,11 @@ public class ReservationPostTest {
 	@Autowired
 	private MockMvc mvc;
 
-	private static ObjectMapper objectMapper = new ObjectMapper();
+	@Autowired
+	private ObjectMapper objectMapper;
 
-	//@Test
-	//@DisplayName("Test missing required info")
+	@Test
+	@DisplayName("Test missing required info")
 	public void no_user_error() throws JsonProcessingException, Exception {
 
 		List<RequestedReservation> requests = new ArrayList<>();
@@ -68,7 +68,6 @@ public class ReservationPostTest {
 
 		LocalDate arrival = LocalDate.of(2020, 8, 2);
 		LocalDate departure = LocalDate.of(2020, 8, 5);
-		LocalDate now = LocalDate.now();
 		Schedule dates = new Schedule(arrival, departure);
 		RequestedReservation request = new RequestedReservation();
 
@@ -76,7 +75,7 @@ public class ReservationPostTest {
 		request.setDates(dates);
 
 		mvc.perform(post("/camping/v1.0/reservations").content(objectMapper.writeValueAsString(request))
-				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)).andExpect(status().is4xxClientError());
+				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
 	}
 
 }

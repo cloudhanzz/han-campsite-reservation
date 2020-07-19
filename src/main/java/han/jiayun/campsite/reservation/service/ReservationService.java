@@ -1,5 +1,8 @@
 package han.jiayun.campsite.reservation.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 
@@ -11,8 +14,12 @@ public interface ReservationService {
 	
 	boolean cancelReservation(String reservationId);
 	
-	ConfirmedReservation modifyReservation(String reservationId);
+	ConfirmedReservation modifyReservation(String reservationId, RequestedReservation patch);
 	
 	ConfirmedReservation getReservation(String reservationId);
+
+	void checkAvailability(List<LocalDate> dates);
+
+	void validatingRequest(RequestedReservation request);
 
 }

@@ -20,14 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import han.jiayun.campsite.reservation.availability.AvailabilityChecker;
 import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.CreationResponse;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.service.ReservationService;
-import han.jiayun.campsite.reservation.service.ValidatingService;
 import han.jiayun.campsite.reservation.util.Messages;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -43,12 +41,6 @@ public class ReservationController {
 
 	@Autowired
 	private AvailabilityFinder availabilityFinder;
-
-	@Autowired
-	private ValidatingService validatingService;
-
-	@Autowired
-	private AvailabilityChecker availabilityChecker;
 
 	@Autowired
 	private ReservationService reservationService;
@@ -73,8 +65,8 @@ public class ReservationController {
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<CreationResponse> makeReservation(@RequestBody RequestedReservation request) {
 
-		validatingRequest(request);
-		checkAvailability(request);
+		reservationService.validatingRequest(request);
+		reservationService.checkAvailability(request.getDates().toDiscreteDates());
 
 		String reservationId = reservationService.createReservation(request);
 		URI location = buildLocation(reservationId);
@@ -83,11 +75,6 @@ public class ReservationController {
 				Messages.AFTER_MAKING_RESERVATION);
 
 		return ResponseEntity.created(location).body(body);
-	}
-
-	private URI buildLocation(String reservationId) {
-
-		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(reservationId).toUri();
 	}
 
 	@GetMapping("/{id}")
@@ -118,17 +105,13 @@ public class ReservationController {
 			@ApiResponse(code = 406, message = "Not Acceptable request body, such as arrival date is not after the departure date"),
 			@ApiResponse(code = 422, message = "Missing required value(s)"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
-	public ResponseEntity<?> modifyReservation(@PathVariable String id, @RequestBody RequestedReservation request) {
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<ConfirmedReservation> modifyReservation(@PathVariable String id, @RequestBody RequestedReservation request) {
+		ConfirmedReservation r = reservationService.modifyReservation(id, request);
+		return ResponseEntity.status(HttpStatus.OK).body(r);
 	}
 
-	private void validatingRequest(RequestedReservation request) {
-		validatingService.validators().forEach(validator -> validator.check(request));
+	private URI buildLocation(String reservationId) {
 
-	}
-
-	private void checkAvailability(RequestedReservation request) {
-		availabilityChecker.check(request.getDates().toDiscreteDates());
-
+		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(reservationId).toUri();
 	}
 }

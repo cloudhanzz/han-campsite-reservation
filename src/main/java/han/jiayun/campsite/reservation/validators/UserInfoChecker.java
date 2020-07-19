@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidRequestBodyException;
-import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 
@@ -23,9 +23,7 @@ public final class UserInfoChecker implements RequestValidator {
 	private final Pattern NAME_PATTERN = Pattern.compile("[a-zA-Z]+");
 
 	@Override
-	public void check(RequestedReservation request) {
-
-		UserInfo user = request.getUser();
+	public void check(UserInfo user, Schedule dates) {
 
 		checkName(user.getFirstName(), "First Name");
 		checkName(user.getLastName(), "Last Name");		

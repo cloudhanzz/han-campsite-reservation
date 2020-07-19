@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidReservationLengthException;
-import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.model.Schedule;
+import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 
 /**
@@ -26,10 +27,10 @@ public final class ReservationLengthChecker implements RequestValidator {
 			+ " days can be reserved";
 
 	@Override
-	public void check(RequestedReservation request) {		
+	public void check(UserInfo user, Schedule dates) {		
 
-		LocalDate arrival = request.getDates().getArrival();
-		LocalDate departure = request.getDates().getDeparture();
+		LocalDate arrival = dates.getArrival();
+		LocalDate departure = dates.getDeparture();
 
 		long days = ChronoUnit.DAYS.between(arrival, departure);
 

@@ -39,7 +39,7 @@ public class ReservationLengthCheckerTest {
 		
 		request.setDates(schedule);
 		
-		assertThrows(InvalidReservationLengthException.class, () -> checker.check(request));
+		assertThrows(InvalidReservationLengthException.class, () -> checker.check(request.getUser(), request.getDates()));
 	}
 	
 
@@ -56,7 +56,7 @@ public class ReservationLengthCheckerTest {
 		
         request.setDates(schedule);
 		
-        assertThrows(InvalidReservationLengthException.class, () -> checker.check(request));
+        assertThrows(InvalidReservationLengthException.class, () -> checker.check(request.getUser(), request.getDates()));
 	}
 	
 
@@ -74,6 +74,6 @@ public class ReservationLengthCheckerTest {
 		
 		request.setDates(schedule);
 		
-		checker.check(request);
+		checker.check(request.getUser(), request.getDates());
 	}	
 }

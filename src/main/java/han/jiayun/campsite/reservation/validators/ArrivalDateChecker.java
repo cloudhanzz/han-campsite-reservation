@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 import han.jiayun.campsite.reservation.exceptions.ReservationTooSoonOrTooFarAwayException;
-import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.model.Schedule;
+import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 
 /**
@@ -31,9 +32,9 @@ public final class ArrivalDateChecker implements RequestValidator {
 			+ MAX_DAYS_IN_ADVANCE + " days in advance";
 
 	@Override
-	public void check(RequestedReservation request) {
+	public void check(UserInfo user, Schedule dates) {
 		
-		LocalDate arrival = request.getDates().getArrival();
+		LocalDate arrival = dates.getArrival();
 		
 		LocalDate now = LocalDate.now();
 		long days = ChronoUnit.DAYS.between(now, arrival);

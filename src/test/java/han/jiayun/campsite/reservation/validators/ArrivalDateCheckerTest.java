@@ -31,7 +31,7 @@ public class ArrivalDateCheckerTest {
 	public void reservation_should_be_at_least_1_day_in_advance(int n_days_before_now) {
 		
 		RequestedReservation request = makeRequest(n_days_before_now);		
-		Exception exception = assertThrows(ReservationTooSoonOrTooFarAwayException.class,() -> checker.check(request));
+		Exception exception = assertThrows(ReservationTooSoonOrTooFarAwayException.class,() -> checker.check(request.getUser(), request.getDates()));
 		assertEquals(ArrivalDateChecker.ERROR_LESS_THAN_MIN_DAYS_IN_ADVANCE, exception.getMessage());
 	}
 	
@@ -41,7 +41,7 @@ public class ArrivalDateCheckerTest {
 	public void reservation_cannot_be_more_than_1_month_in_advance(int n_days_after_now) {
 		
 		RequestedReservation request = makeRequest(n_days_after_now);		
-		Exception exception = assertThrows(ReservationTooSoonOrTooFarAwayException.class,() -> checker.check(request));
+		Exception exception = assertThrows(ReservationTooSoonOrTooFarAwayException.class,() -> checker.check(request.getUser(), request.getDates()));
 		assertEquals(ArrivalDateChecker.ERROR_MORE_THAN_MAX_DAYS_IN_ADVANCE, exception.getMessage());
 	}
 	
@@ -52,7 +52,7 @@ public class ArrivalDateCheckerTest {
 	public void validArrivalProvided(int n_days_in_advance) {
 		
 		RequestedReservation request = makeRequest(n_days_in_advance);		
-		checker.check(request);
+		checker.check(request.getUser(), request.getDates());
 	}
 
 

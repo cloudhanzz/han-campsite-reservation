@@ -1,10 +1,12 @@
 package han.jiayun.campsite.reservation.validators;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import han.jiayun.campsite.reservation.annotation.Required;
 import han.jiayun.campsite.reservation.exceptions.MissRequiredValuesException;
-import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.model.Schedule;
+import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 import han.jiayun.campsite.reservation.util.ReflectionTool;
 
@@ -16,14 +18,19 @@ import han.jiayun.campsite.reservation.util.ReflectionTool;
  */
 public final class MissingValueChecker implements RequestValidator {
     
-    public void check(RequestedReservation request) {		
-    	checkMissingFields(request);    	
-    	checkMissingFields(request.getUser());    	
-    	checkMissingFields(request.getDates());
-	}
-
-	private void checkMissingFields(Object request) {
-		List<String> missingParts = ReflectionTool.getMissedAttributes(request, Required.class);
+    public void check(UserInfo user, Schedule dates) {	
+    	List<String> missingParts = new ArrayList<>();
+    	if(user == null) {
+    		missingParts.add("user");
+    	} else {
+    		missingParts.addAll(ReflectionTool.getMissedAttributes(user, Required.class));
+    	}
+    	if(dates == null) {
+    		missingParts.add("dates");
+    	}else {
+    		missingParts.addAll(ReflectionTool.getMissedAttributes(dates, Required.class));
+    	}
+    	
     	if(!missingParts.isEmpty()) {
     		throw new MissRequiredValuesException(missingParts);
     	}
