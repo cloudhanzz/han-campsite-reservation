@@ -132,8 +132,8 @@ public class PostGetAndCancelTest extends ControllerTestParent {
 		LocalDate arrival = today.plusDays(1);
 		LocalDate departure = arrival.plusDays(2);
 		
-		String fromDate = arrival.format(formatter);
-		String toDate = departure.minusDays(1).format(formatter);
+		String fromDate = arrival.format(DATETIME_FORMATTER);
+		String toDate = departure.minusDays(1).format(DATETIME_FORMATTER);
 		
 		Schedule dates = new Schedule(arrival, departure);
 		RequestedReservation request = new RequestedReservation();
@@ -158,8 +158,8 @@ public class PostGetAndCancelTest extends ControllerTestParent {
 		LocalDate arrival = today.plusDays(1);
 		LocalDate departure = arrival.plusDays(2);
 		
-		String fromDate = arrival.format(formatter);
-		String toDate = departure.minusDays(1).format(formatter);
+		String fromDate = arrival.format(DATETIME_FORMATTER);
+		String toDate = departure.minusDays(1).format(DATETIME_FORMATTER);
 		
 		Schedule dates = new Schedule(arrival, departure);
 		RequestedReservation request = new RequestedReservation();

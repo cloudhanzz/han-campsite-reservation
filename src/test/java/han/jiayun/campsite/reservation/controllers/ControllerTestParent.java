@@ -8,5 +8,5 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class ControllerTestParent {		
-	static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	public static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 }

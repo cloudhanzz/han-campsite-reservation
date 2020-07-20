@@ -45,8 +45,8 @@ public class AvailabilityReportTest extends ControllerTestParent{
 		LocalDate from = now.plusDays(1);
 		LocalDate to = now.plusMonths(1);
 		
-		String fromDate = from.format(formatter);
-		String toDate = to.format(formatter);
+		String fromDate = from.format(DATETIME_FORMATTER);
+		String toDate = to.format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates"))
 		.andExpect(status().isOk())
@@ -63,8 +63,8 @@ public class AvailabilityReportTest extends ControllerTestParent{
 		LocalDate from = now.plusDays(10);
 		LocalDate to = now.plusMonths(1);
 		
-		String fromDate = from.format(formatter);
-		String toDate = to.format(formatter);
+		String fromDate = from.format(DATETIME_FORMATTER);
+		String toDate = to.format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate))
 		.andExpect(status().isOk())
@@ -81,8 +81,8 @@ public class AvailabilityReportTest extends ControllerTestParent{
 		LocalDate from = now.plusDays(1);
 		LocalDate to = now.plusMonths(1);
 		
-		String fromDate = from.format(formatter);
-		String toDate = to.format(formatter);
+		String fromDate = from.format(DATETIME_FORMATTER);
+		String toDate = to.format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("to", toDate))
 		.andExpect(status().isOk())
@@ -100,8 +100,8 @@ public class AvailabilityReportTest extends ControllerTestParent{
 		LocalDate from = now.plusDays(10);
 		LocalDate to = now.plusMonths(1);
 		
-		String fromDate = from.format(formatter);
-		String toDate = to.format(formatter);
+		String fromDate = from.format(DATETIME_FORMATTER);
+		String toDate = to.format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate).queryParam("to", toDate))
 		.andExpect(status().isOk())
@@ -115,7 +115,7 @@ public class AvailabilityReportTest extends ControllerTestParent{
 	void testStartingDateSameAsEndingDate() throws Exception {
 		
 		LocalDate now = LocalDate.now();
-		String date = now.plusDays(10).format(formatter);
+		String date = now.plusDays(10).format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", date).queryParam("to", date))
 		.andExpect(status().isOk())
@@ -132,8 +132,8 @@ public class AvailabilityReportTest extends ControllerTestParent{
 		LocalDate from = now.plusDays(10);
 		LocalDate to = from.minusDays(1);
 		
-		String fromDate = from.format(formatter);
-		String toDate = to.format(formatter);
+		String fromDate = from.format(DATETIME_FORMATTER);
+		String toDate = to.format(DATETIME_FORMATTER);
 		
 		mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate).queryParam("to", toDate))
 		.andExpect(status().is4xxClientError());

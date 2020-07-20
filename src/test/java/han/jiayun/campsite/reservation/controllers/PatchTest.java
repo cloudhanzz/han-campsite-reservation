@@ -110,16 +110,16 @@ public class PatchTest extends ControllerTestParent {
         
 		LocalDate arrival = today.plusDays(1);
 		LocalDate departure = arrival.plusDays(2);
-		String fromDate = arrival.format(formatter);
-		String departureDate = departure.format(formatter);
-		String toDate = departure.minusDays(1).format(formatter);
+		String fromDate = arrival.format(DATETIME_FORMATTER);
+		String departureDate = departure.format(DATETIME_FORMATTER);
+		String toDate = departure.minusDays(1).format(DATETIME_FORMATTER);
 		
 
 		LocalDate newArrival = today.plusDays(10);
 		LocalDate newDeparture = newArrival.plusDays(2);
-		String newFromDate = newArrival.format(formatter);
-		String newDepartureDate = newDeparture.format(formatter);
-		String newToDate = newDeparture.minusDays(1).format(formatter);
+		String newFromDate = newArrival.format(DATETIME_FORMATTER);
+		String newDepartureDate = newDeparture.format(DATETIME_FORMATTER);
+		String newToDate = newDeparture.minusDays(1).format(DATETIME_FORMATTER);
 		Schedule newDates = new Schedule(newArrival, newDeparture);
 		
 		
