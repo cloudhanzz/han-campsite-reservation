@@ -4,6 +4,11 @@ import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 public interface RequestValidator {
 	
 	default void check(RequestedReservation request) {
@@ -11,5 +16,4 @@ public interface RequestValidator {
 	}
 	
 	void check(UserInfo user, Schedule dates);
-
 }

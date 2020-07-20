@@ -48,7 +48,6 @@ public final class ArrivalDateChecker implements RequestValidator {
 
 		if (message != null) {
 			throw new ReservationTooSoonOrTooFarAwayException(message);
-		}
-		
+		}		
 	}
 }

@@ -43,8 +43,4 @@ public class ConfirmedReservation extends RequestedReservation {
 	public ConfirmedReservation() {
 		this.id = UUID.randomUUID().toString();
 	}
-
-	public String getId() {
-		return id;
-	}
 }

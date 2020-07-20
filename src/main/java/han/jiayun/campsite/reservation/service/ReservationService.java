@@ -8,7 +8,11 @@ import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
-//TODO add context aware
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 public interface ReservationService {
 	
 	// return reservation ID

@@ -14,6 +14,11 @@ import han.jiayun.campsite.reservation.exceptions.ReservationTooSoonOrTooFarAway
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @DisplayName("Test Arrival Date Checker")
 public class ArrivalDateCheckerTest {
 	

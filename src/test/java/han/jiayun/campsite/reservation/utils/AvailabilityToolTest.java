@@ -16,6 +16,11 @@ import org.junit.jupiter.api.Test;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @DisplayName("Test the Availability Tool")
 public class AvailabilityToolTest {
 

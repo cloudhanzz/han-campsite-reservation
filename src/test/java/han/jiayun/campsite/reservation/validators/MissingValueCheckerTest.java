@@ -13,6 +13,11 @@ import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @DisplayName("Test Pre Checker")
 public class MissingValueCheckerTest {
 

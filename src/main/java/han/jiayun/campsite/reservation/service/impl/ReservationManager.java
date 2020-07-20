@@ -21,6 +21,11 @@ import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 import han.jiayun.campsite.reservation.service.ReservationService;
 import han.jiayun.campsite.reservation.service.ValidatingService;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @Service
 public class ReservationManager implements ReservationService {
 

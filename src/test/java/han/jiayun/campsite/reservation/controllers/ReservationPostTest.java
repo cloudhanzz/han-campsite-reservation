@@ -25,6 +25,11 @@ import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Test creating reservations")

@@ -19,12 +19,14 @@ import han.jiayun.campsite.reservation.util.ReflectionTool;
 public final class MissingValueChecker implements RequestValidator {
     
     public void check(UserInfo user, Schedule dates) {	
+    	
     	List<String> missingParts = new ArrayList<>();
     	if(user == null) {
     		missingParts.add("user");
     	} else {
     		missingParts.addAll(ReflectionTool.getMissedAttributes(user, Required.class));
     	}
+    	
     	if(dates == null) {
     		missingParts.add("dates");
     	}else {

@@ -13,9 +13,8 @@ import org.springframework.http.HttpStatus;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ReservationNotFoundException extends RestException {
 
-	private static final String FORMAT_MESSAGE = "Reservation %s not found";
-
 	private static final long serialVersionUID = 1L;
+	private static final String FORMAT_MESSAGE = "Reservation %s not found";
 
 	/**
 	 * @param requestId

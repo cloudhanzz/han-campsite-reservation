@@ -11,6 +11,11 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @DisplayName("Test DesiredDate model")
 public class ScheduleTest {
 	

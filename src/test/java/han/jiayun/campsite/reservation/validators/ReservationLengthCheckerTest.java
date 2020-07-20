@@ -14,6 +14,11 @@ import han.jiayun.campsite.reservation.exceptions.InvalidReservationLengthExcept
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 
+/**
+ * 
+ * @author Jiayun Han
+ *
+ */
 @DisplayName("Test Reservation Length Checker")
 public class ReservationLengthCheckerTest {
 	

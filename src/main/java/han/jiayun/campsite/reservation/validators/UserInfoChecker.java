@@ -33,6 +33,7 @@ public final class UserInfoChecker implements RequestValidator {
 	/**
 	 * For simplicity, it only checks that starts with a letter.
 	 * @param name
+	 * @param header for messaging purpose
 	 */
 	public void checkName(String name, String header) {
 		if(!NAME_PATTERN.matcher(name).matches()) {

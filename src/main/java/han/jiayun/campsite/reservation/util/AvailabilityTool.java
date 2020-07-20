@@ -18,8 +18,7 @@ import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 public final class AvailabilityTool {
 
 	private AvailabilityTool() {
-	}
-	
+	}	
 
 	public static boolean isDateAvailable(Map<String, ConfirmedReservation> reservations, LocalDate date) {
 		return !(isDateNotAvailable(reservations, date));
