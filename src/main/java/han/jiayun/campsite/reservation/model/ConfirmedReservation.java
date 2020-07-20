@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Getter;
@@ -22,7 +21,6 @@ import lombok.Setter;
 public class ConfirmedReservation extends RequestedReservation {
 
 	private String id;
-	
 	private UserInfo user;	
 	private Schedule dates;
 
@@ -30,15 +28,7 @@ public class ConfirmedReservation extends RequestedReservation {
 	private LocalDateTime reservedAt;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private LocalDateTime modifiedAt;	
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private LocalDateTime cancelledAt;
-	
-	@JsonIgnore
-	public boolean isActive() {
-		return cancelledAt == null;
-	}
+	private LocalDateTime modifiedAt;
 
 	public ConfirmedReservation() {
 		this.id = UUID.randomUUID().toString();

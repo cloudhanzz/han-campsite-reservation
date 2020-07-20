@@ -15,12 +15,13 @@ public class ReservationNotFoundException extends RestException {
 
 	private static final long serialVersionUID = 1L;
 	private static final String FORMAT_MESSAGE = "Reservation %s not found";
+	private static final String NOTE = "Please provide the correct reservation ID";
 
 	/**
 	 * @param requestId
 	 *            The request ID string for logging purpose
 	 */
-	public ReservationNotFoundException(String reservationId, String note) {
-		super(String.format(FORMAT_MESSAGE, reservationId), HttpStatus.NOT_FOUND, note);
+	public ReservationNotFoundException(String reservationId) {
+		super(String.format(FORMAT_MESSAGE, reservationId), HttpStatus.NOT_FOUND, NOTE);
 	}
 }

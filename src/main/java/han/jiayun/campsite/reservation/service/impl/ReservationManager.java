@@ -54,17 +54,11 @@ public class ReservationManager implements ReservationService {
 	}
 
 	@Override
-	public boolean cancelReservation(String reservationId) {
-
-		ConfirmedReservation reservation = tryFindReservationById(reservationId);
-
-		try {
-			reservation.setCancelledAt(LocalDateTime.now());
-		} catch (Exception e) {
-			return false;
+	public void cancelReservation(String reservationId) {
+		ConfirmedReservation reservation = ReservationRepository.INSTANCE.reservations().remove(reservationId);
+		if(reservation == null) {
+			throw new ReservationNotFoundException(reservationId);
 		}
-
-		return true;
 	}
 
 	@Override
@@ -166,8 +160,8 @@ public class ReservationManager implements ReservationService {
 
 	private ConfirmedReservation tryFindReservationById(String reservationId) {
 		ConfirmedReservation reservation = ReservationRepository.INSTANCE.reservations().get(reservationId);
-		if (reservation == null || reservation.getCancelledAt() != null) {
-			throw new ReservationNotFoundException(reservationId, "Please provide the correct reservation identifier");
+		if (reservation == null) {
+			throw new ReservationNotFoundException(reservationId);
 		}
 		return reservation;
 	}

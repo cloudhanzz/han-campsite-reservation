@@ -3,12 +3,16 @@ package han.jiayun.campsite.reservation.controllers;
 import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,6 +34,7 @@ import han.jiayun.campsite.reservation.exceptions.ReservationTooSoonOrTooFarAway
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
+import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 import han.jiayun.campsite.reservation.validators.ArrivalDateChecker;
 import han.jiayun.campsite.reservation.validators.ReservationLengthChecker;
 
@@ -50,6 +55,14 @@ public class ReservationPostTest {
 
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@BeforeEach
+	public void cancelExistingReservations() throws Exception {
+		List<String> ids = Collections.list(ReservationRepository.INSTANCE.reservations().keys());
+		for(String id : ids) {
+			mvc.perform(delete("/camping/v1.0/reservations/" + id));
+		}
+	}
 	
 	@ParameterizedTest
 	@CsvFileSource(resources = "/insufficient_request_information.csv")
@@ -139,17 +152,16 @@ public class ReservationPostTest {
 	}
 
 	@Test
-	@DisplayName("Test Created Reservation")
-	public void created() throws Exception {
+	@DisplayName("😱: Test Successfully Created Reservation")
+	public void created_reservation_OK() throws Exception {
 
-		UserInfo user = new UserInfo("John", "Doe", "john.doe@gmail.com");
-
-		LocalDate arrival = LocalDate.of(2020, 8, 12);
-		LocalDate departure = LocalDate.of(2020, 8, 15);
+		LocalDate today = LocalDate.now();
+		LocalDate arrival = today.plusDays(1);
+		LocalDate departure = arrival.plusDays(2);
 		Schedule dates = new Schedule(arrival, departure);
 		RequestedReservation request = new RequestedReservation();
 
-		request.setUser(user);
+		request.setUser(USER);
 		request.setDates(dates);
 
 		mvc.perform(post("/camping/v1.0/reservations").content(objectMapper.writeValueAsString(request))

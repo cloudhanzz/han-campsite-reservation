@@ -29,7 +29,6 @@ public final class AvailabilityTool {
 		List<LocalDate> list = reservations
 				.values()
 				.stream()
-				.filter(ConfirmedReservation::isActive)
 				.map(r -> r.getDates())
 				.flatMap(d -> d.toDiscreteDates().stream()).collect(toList());
 		

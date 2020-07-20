@@ -92,10 +92,8 @@ public class ReservationController {
 			@ApiResponse(code = 404, message = "Reservation"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<?> cancelReservation(@PathVariable String id) {
-		if (reservationService.cancelReservation(id)) {
-			return ResponseEntity.noContent().build();
-		}
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		reservationService.cancelReservation(id);
+		return ResponseEntity.noContent().build();
 	}
 
 	@PatchMapping("/{id}")

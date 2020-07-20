@@ -18,7 +18,7 @@ public interface ReservationService {
 	// return reservation ID
 	String createReservation(RequestedReservation request);
 	
-	boolean cancelReservation(String reservationId);
+	void cancelReservation(String reservationId);
 	
 	ConfirmedReservation modifyReservation(String reservationId, RequestedReservation patch);
 	
