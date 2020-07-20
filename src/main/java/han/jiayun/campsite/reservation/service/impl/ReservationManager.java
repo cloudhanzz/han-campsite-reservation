@@ -8,12 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import han.jiayun.campsite.reservation.exceptions.GenericServerException;
 import han.jiayun.campsite.reservation.exceptions.InvalidDateRangeException;
-import han.jiayun.campsite.reservation.exceptions.ReservationNotFoundException;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;

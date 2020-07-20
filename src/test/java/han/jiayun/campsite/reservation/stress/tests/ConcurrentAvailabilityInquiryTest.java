@@ -58,7 +58,7 @@ public class ConcurrentAvailabilityInquiryTest extends ControllerTestParent {
 
 		LocalDate now = LocalDate.now();
 		
-		for (int i = 0; i < 100_000; i++) {
+		for (int i = 0; i < 100; i++) {
 
 			int startPlus = random.nextInt(20) + 1;
 			int fromStart = random.nextInt(25);

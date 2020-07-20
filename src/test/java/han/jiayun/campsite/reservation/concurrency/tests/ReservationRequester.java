@@ -27,13 +27,13 @@ public class ReservationRequester implements Callable<Boolean> {
 	@Override
 	public Boolean call() throws Exception {
 
-		// Create reservation
 		String result = mvc
 				.perform(post("/camping/v1.0/reservations").content(request)
 						.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
 				.andReturn().getResponse().getContentAsString();
 
 		CreationResponse response = objectMapper.readValue(result, CreationResponse.class);
+		
 		return response.getReservationId() != null;
 	}
 

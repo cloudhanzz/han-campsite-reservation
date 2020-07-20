@@ -26,8 +26,6 @@ public interface ReservationService {
 	
 	ConfirmedReservation getReservation(String reservationId);
 
-	//void checkAvailability(List<LocalDate> dates);
-
 	void validatePostRequest(RequestedReservation request);
 
 	void validatePatchRequest(UserInfo user, Schedule dates);
