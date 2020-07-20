@@ -21,6 +21,6 @@ public class InvalidRequestBodyException extends RestException {
 	 * @param message
 	 */
 	public InvalidRequestBodyException(String message) {
-		super("RequestBody contains no " + message, HttpStatus.NOT_ACCEPTABLE, NOTE);
+		super(message, HttpStatus.NOT_ACCEPTABLE, NOTE);
 	}
 }

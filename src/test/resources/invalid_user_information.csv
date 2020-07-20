@@ -1,0 +1,7 @@
+"invalid First Name", "{""user"": {""firstName"": ""3J"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.com"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Last Name", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""😱Han"", ""email"": ""jiayunhan@gmail.com"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.123"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""123@123.123"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@@gmail.com"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.1sky"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"invalid Email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayun.hangmail.com"" }, ""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"

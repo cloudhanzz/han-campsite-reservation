@@ -70,7 +70,7 @@ public class UserInfoCheckerTest {
 		RequestedReservation request = new RequestedReservation();
 		request.setUser(user);
 		Exception ex = assertThrows(InvalidRequestBodyException.class, () -> checker.check(request.getUser(), request.getDates()));
-		assertTrue(ex.getMessage().contains("no valid Email"));
+		assertTrue(ex.getMessage().contains("Email"));
 	}
 	
 	@DisplayName("Test email is valid")

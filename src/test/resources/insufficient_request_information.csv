@@ -1,0 +1,8 @@
+"missing user, dates", "{}"
+"missing firstName, lastName, email, arrival, departure", "{""user"": {}, ""dates"": {}}"
+"missing firstName", "{""user"": {""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.com""},""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"missing lastName", "{""user"": {""firstName"": ""Jiayun"", ""email"": ""jiayunhan@gmail.com""},""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"missing email", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han""},""dates"": {""arrival"": ""2020-08-02"", ""departure"": ""2020-08-05""}}"
+"missing dates", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.com""}}"
+"missing arrival", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.com""},""dates"": {""departure"": ""2020-08-05""}}"
+"missing departure", "{""user"": {""firstName"": ""Jiayun"", ""lastName"": ""Han"", ""email"": ""jiayunhan@gmail.com""},""dates"": {""arrival"": ""2020-08-05""}}"
