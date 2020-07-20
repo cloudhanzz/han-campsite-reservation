@@ -25,9 +25,18 @@ public class ProjectConfig {
 		return new ValidatingService() {
 			
 			@Override
-			public List<RequestValidator> validators() {
+			public List<RequestValidator> postValidators() {
 				List<RequestValidator> checkers = new ArrayList<>();
 				checkers.add(new MissingValueChecker());
+				checkers.add(new UserInfoChecker());
+				checkers.add(new ArrivalDateChecker());
+				checkers.add(new ReservationLengthChecker());
+				return checkers;
+			}
+			
+			@Override
+			public List<RequestValidator> patchValidators() {
+				List<RequestValidator> checkers = new ArrayList<>();
 				checkers.add(new UserInfoChecker());
 				checkers.add(new ArrivalDateChecker());
 				checkers.add(new ReservationLengthChecker());

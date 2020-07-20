@@ -8,7 +8,7 @@ import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
 import han.jiayun.campsite.reservation.service.RequestValidator;
 
-/**
+/**s
  * Checking whether the reservation to be made will start too soon or too far
  * away.
  * <p>

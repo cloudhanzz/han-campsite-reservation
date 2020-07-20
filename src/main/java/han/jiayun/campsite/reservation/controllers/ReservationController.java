@@ -65,7 +65,7 @@ public class ReservationController {
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<CreationResponse> makeReservation(@RequestBody RequestedReservation request) {
 
-		reservationService.validatingRequest(request);
+		reservationService.validatePostRequest(request);
 		reservationService.checkAvailability(request.getDates().toDiscreteDates());
 
 		String reservationId = reservationService.createReservation(request);
@@ -111,7 +111,6 @@ public class ReservationController {
 	}
 
 	private URI buildLocation(String reservationId) {
-
 		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(reservationId).toUri();
 	}
 }

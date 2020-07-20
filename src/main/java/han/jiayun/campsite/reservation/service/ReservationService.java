@@ -5,6 +5,8 @@ import java.util.List;
 
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
+import han.jiayun.campsite.reservation.model.Schedule;
+import han.jiayun.campsite.reservation.model.UserInfo;
 
 //TODO add context aware
 public interface ReservationService {
@@ -20,6 +22,8 @@ public interface ReservationService {
 
 	void checkAvailability(List<LocalDate> dates);
 
-	void validatingRequest(RequestedReservation request);
+	void validatePostRequest(RequestedReservation request);
+
+	void validatePatchRequest(UserInfo user, Schedule dates);
 
 }
