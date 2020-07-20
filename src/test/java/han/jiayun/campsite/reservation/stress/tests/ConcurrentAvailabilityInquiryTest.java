@@ -1,14 +1,18 @@
 package han.jiayun.campsite.reservation.stress.tests;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import han.jiayun.campsite.reservation.controllers.ControllerTestParent;
 import han.jiayun.campsite.reservation.model.FromTo;
+import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +35,15 @@ public class ConcurrentAvailabilityInquiryTest extends ControllerTestParent {
 	private MockMvc mvc;
 
 	@Autowired
-	private ObjectMapper objectMapper;
+	private ObjectMapper objectMapper;	
+
+	@BeforeEach
+	public void cancelExistingReservations() throws Exception {
+		Set<String> ids = ReservationRepository.INSTANCE.getReservationIds();
+		for(String id : ids) {
+			mvc.perform(delete("/camping/v1.0/reservations/" + id));
+		}
+	}
 
 	@DisplayName("Test concurrently respond to 100,000 availability inquiries")
 	@Test

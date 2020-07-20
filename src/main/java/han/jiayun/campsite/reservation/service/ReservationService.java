@@ -2,8 +2,10 @@ package han.jiayun.campsite.reservation.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
+import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
 import han.jiayun.campsite.reservation.model.Schedule;
 import han.jiayun.campsite.reservation.model.UserInfo;
@@ -24,10 +26,12 @@ public interface ReservationService {
 	
 	ConfirmedReservation getReservation(String reservationId);
 
-	void checkAvailability(List<LocalDate> dates);
+	//void checkAvailability(List<LocalDate> dates);
 
 	void validatePostRequest(RequestedReservation request);
 
 	void validatePatchRequest(UserInfo user, Schedule dates);
+
+	List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd);
 
 }

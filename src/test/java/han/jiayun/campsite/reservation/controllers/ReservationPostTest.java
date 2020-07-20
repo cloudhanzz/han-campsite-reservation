@@ -9,8 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +57,7 @@ public class ReservationPostTest {
 	
 	@BeforeEach
 	public void cancelExistingReservations() throws Exception {
-		List<String> ids = Collections.list(ReservationRepository.INSTANCE.reservations().keys());
+		Set<String> ids = ReservationRepository.INSTANCE.getReservationIds();
 		for(String id : ids) {
 			mvc.perform(delete("/camping/v1.0/reservations/" + id));
 		}

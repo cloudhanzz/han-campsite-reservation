@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
+//import han.jiayun.campsite.reservation.availability.AvailabilityFinder;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.CreationResponse;
 import han.jiayun.campsite.reservation.model.FromTo;
@@ -40,9 +40,6 @@ import io.swagger.annotations.ApiResponses;
 public class ReservationController {
 
 	@Autowired
-	private AvailabilityFinder availabilityFinder;
-
-	@Autowired
 	private ReservationService reservationService;
 
 	@GetMapping("/available/dates")
@@ -53,7 +50,7 @@ public class ReservationController {
 	public List<FromTo> getAvailableDates(
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<LocalDate> from,
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<LocalDate> to) {
-		return availabilityFinder.findAvailableDateRanges(from, to);
+		return reservationService.findAvailableDateRanges(from, to);
 	}
 
 	@PostMapping
@@ -66,7 +63,6 @@ public class ReservationController {
 	public ResponseEntity<CreationResponse> makeReservation(@RequestBody RequestedReservation request) {
 
 		reservationService.validatePostRequest(request);
-		reservationService.checkAvailability(request.getDates().toDiscreteDates());
 
 		String reservationId = reservationService.createReservation(request);
 		URI location = buildLocation(reservationId);
@@ -104,8 +100,8 @@ public class ReservationController {
 			@ApiResponse(code = 422, message = "Missing required value(s)"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<ConfirmedReservation> modifyReservation(@PathVariable String id, @RequestBody RequestedReservation request) {
-		ConfirmedReservation r = reservationService.modifyReservation(id, request);
-		return ResponseEntity.status(HttpStatus.OK).body(r);
+		ConfirmedReservation reservation = reservationService.modifyReservation(id, request);
+		return ResponseEntity.status(HttpStatus.OK).body(reservation);
 	}
 
 	private URI buildLocation(String reservationId) {
