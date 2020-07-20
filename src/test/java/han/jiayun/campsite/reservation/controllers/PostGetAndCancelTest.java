@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,9 +38,8 @@ import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Test getting, and cancelling reservations")
-public class PostGetAndCancelTest {
-		
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+public class PostGetAndCancelTest extends ControllerTestParent {
+
 	private static final UserInfo USER = new UserInfo("John", "Doe", "jiayunhan@gmail.com");
 
 	@Autowired

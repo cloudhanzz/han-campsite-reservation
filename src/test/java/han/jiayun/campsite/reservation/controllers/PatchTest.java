@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,10 +39,7 @@ import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Test getting, and cancelling reservations")
-public class PatchTest {
-		
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	// private static final UserInfo USER = new UserInfo("John", "Doe", "jiayunhan@gmail.com");
+public class PatchTest extends ControllerTestParent {
 
 	@Autowired
 	private MockMvc mvc;
@@ -180,67 +176,4 @@ public class PatchTest {
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$", hasSize(0)));
 	}
-//	
-//	@Test
-//	@DisplayName("Test reserved dates are not available after reservation")
-//	public void dates_unavailable_after_reservation() throws Exception {
-//
-//		LocalDate today = LocalDate.now();;
-//		LocalDate arrival = today.plusDays(1);
-//		LocalDate departure = arrival.plusDays(2);
-//		
-//		String fromDate = arrival.format(formatter);
-//		String toDate = departure.minusDays(1).format(formatter);
-//		
-//		Schedule dates = new Schedule(arrival, departure);
-//		RequestedReservation request = new RequestedReservation();
-//
-//		request.setUser(USER);
-//		request.setDates(dates);
-//
-//		// Create reservation
-//		 mvc.perform(post("/camping/v1.0/reservations").content(objectMapper.writeValueAsString(request))
-//				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON));
-//		 
-//		// Check dates not available
-//		 mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate).queryParam("to", toDate))
-//		 .andExpect(jsonPath("$", hasSize(0)));		 
-//	}
-//	
-//	@Test
-//	@DisplayName("Test reserved dates are available again after reservation is cancelled")
-//	public void dates_available_after_reservation_cancelled() throws Exception {
-//
-//		LocalDate today = LocalDate.now();;
-//		LocalDate arrival = today.plusDays(1);
-//		LocalDate departure = arrival.plusDays(2);
-//		
-//		String fromDate = arrival.format(formatter);
-//		String toDate = departure.minusDays(1).format(formatter);
-//		
-//		Schedule dates = new Schedule(arrival, departure);
-//		RequestedReservation request = new RequestedReservation();
-//
-//		request.setUser(USER);
-//		request.setDates(dates);
-//
-//		// Create reservation
-//		String result = mvc.perform(post("/camping/v1.0/reservations").content(objectMapper.writeValueAsString(request))
-//				.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
-//				.andReturn().getResponse().getContentAsString();
-//		
-//		CreationResponse response = objectMapper.readValue(result, CreationResponse.class);		
-//		String reservationId = response.getReservationId();
-//		 
-//		// Check dates not available
-//		 mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate).queryParam("to", toDate))
-//		 .andExpect(jsonPath("$", hasSize(0)));
-//		 
-//		// Cancel reservation
-//		mvc.perform(delete("/camping/v1.0/reservations/" + reservationId));
-//
-//		// Check dates become available again
-//		 mvc.perform(get("/camping/v1.0/reservations/available/dates").queryParam("from", fromDate).queryParam("to", toDate))
-//		 .andExpect(jsonPath("$", hasSize(1)));		 
-//	}
 }

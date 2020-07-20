@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,9 +24,7 @@ import han.jiayun.campsite.reservation.repositories.ReservationRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("Test resporting available date ranges")
-public class AvailabilityReportTest {
-	
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+public class AvailabilityReportTest extends ControllerTestParent{
 
 	@Autowired
 	private MockMvc mvc;
