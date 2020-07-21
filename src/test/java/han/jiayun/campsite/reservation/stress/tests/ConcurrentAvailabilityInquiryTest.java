@@ -83,7 +83,7 @@ public class ConcurrentAvailabilityInquiryTest extends ControllerTestParent {
 		for (int i = 0; i < resultList.size(); i++) {
 			Future<List<FromTo>> result = resultList.get(i);
 			String availability = objectMapper.writeValueAsString(result.get());
-			System.out.printf("Inquiry %d: %s\n", i+1, availability);
+			System.out.printf("Inquiry %d available: %s\n", i+1, availability);
 		}
 
 		executor.shutdown();

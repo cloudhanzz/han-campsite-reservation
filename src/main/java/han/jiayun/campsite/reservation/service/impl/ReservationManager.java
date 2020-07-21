@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import han.jiayun.campsite.reservation.exceptions.InvalidDateRangeException;
+import han.jiayun.campsite.reservation.exceptions.InvalidRequestBodyException;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
@@ -59,6 +60,9 @@ public class ReservationManager implements ReservationService {
 	@Override
 	public ConfirmedReservation modifyReservation(String reservationId, RequestedReservation patch) {		
 
+		if(patch.getDates() == null && patch.getUser() == null) {
+			throw new InvalidRequestBodyException("No new information is provided.");
+		}
 		return ReservationRepository.INSTANCE.modifyReservation(objMapper, validatingService.patchValidators(), reservationId, patch);
 	}
 
