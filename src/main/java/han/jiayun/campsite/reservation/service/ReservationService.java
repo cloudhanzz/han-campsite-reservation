@@ -28,8 +28,6 @@ public interface ReservationService {
 
 	void validatePostRequest(RequestedReservation request);
 
-	void validatePatchRequest(UserInfo user, Schedule dates);
-
 	List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd);
 
 }

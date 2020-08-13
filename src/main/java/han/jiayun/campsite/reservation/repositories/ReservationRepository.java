@@ -31,7 +31,7 @@ public enum ReservationRepository {
 	// reservationID -> reservations
 	private final Map<String, ConfirmedReservation> reservations;
 		
-	private ReservationRepository() {
+	ReservationRepository() {
 		this.reservations = new HashMap<>();
 	}
 	

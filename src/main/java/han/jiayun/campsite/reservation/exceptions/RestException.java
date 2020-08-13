@@ -20,8 +20,8 @@ public class RestException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	private HttpStatus httpStatus;
-	private String note;
+	private final HttpStatus httpStatus;
+	private final String note;
 
 	/**
 	 * 
