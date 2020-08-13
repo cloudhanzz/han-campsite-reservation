@@ -77,11 +77,6 @@ public class ReservationManager implements ReservationService {
 	}
 
 	@Override
-	public void validatePatchRequest(UserInfo user, Schedule dates) {
-		validatingService.patchValidators().forEach(validator -> validator.check(user, dates));
-	}
-
-	@Override
 	public List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd) {
 		LocalDate now = LocalDate.now();		
 		LocalDate start = optionalStart.orElse(now.plusDays(1));

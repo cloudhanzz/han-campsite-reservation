@@ -7,8 +7,6 @@ import java.util.Optional;
 import han.jiayun.campsite.reservation.model.ConfirmedReservation;
 import han.jiayun.campsite.reservation.model.FromTo;
 import han.jiayun.campsite.reservation.model.RequestedReservation;
-import han.jiayun.campsite.reservation.model.Schedule;
-import han.jiayun.campsite.reservation.model.UserInfo;
 
 /**
  * 
@@ -29,5 +27,4 @@ public interface ReservationService {
 	void validatePostRequest(RequestedReservation request);
 
 	List<FromTo> findAvailableDateRanges(Optional<LocalDate> optionalStart, Optional<LocalDate> optionalEnd);
-
 }
