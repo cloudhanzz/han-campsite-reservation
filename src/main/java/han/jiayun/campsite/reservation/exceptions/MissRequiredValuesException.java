@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
  * @author Jiayun Han
  *
  */
-@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class MissRequiredValuesException extends RestException {
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +26,6 @@ public class MissRequiredValuesException extends RestException {
 	 *            The names of the missing attributes
 	 */
 	public MissRequiredValuesException(List<String> missingParts) {
-		super("missing " + missingParts.stream().collect(joining(", ")), HttpStatus.UNPROCESSABLE_ENTITY, NOTE);
+		super("missing " + missingParts.stream().collect(joining(", ")), HttpStatus.BAD_REQUEST, NOTE);
 	}
 }

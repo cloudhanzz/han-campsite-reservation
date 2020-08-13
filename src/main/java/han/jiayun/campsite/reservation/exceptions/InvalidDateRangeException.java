@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author Jiayun Han
  *
  */
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class InvalidDateRangeException extends RestException {
 
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,7 @@ public class InvalidDateRangeException extends RestException {
 	private static InvalidDateRangeException INSTANCE = new InvalidDateRangeException(MESSAGE);
 	
 	private InvalidDateRangeException(String message) {
-		super(message, HttpStatus.NOT_ACCEPTABLE, NOTE);
+		super(message, HttpStatus.UNPROCESSABLE_ENTITY, NOTE);
 	}
 	
 	public static InvalidDateRangeException instance() {

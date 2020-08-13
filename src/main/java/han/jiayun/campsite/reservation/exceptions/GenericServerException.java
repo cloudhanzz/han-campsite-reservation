@@ -16,8 +16,6 @@ public class GenericServerException extends RestException {
 	
 	/**
 	 * @param message
-	 * @param requestId
-	 *            The request ID string for logging purpose
 	 */
 	public GenericServerException(String message) {
 		super(message, HttpStatus.INTERNAL_SERVER_ERROR, "This is a generic internal server error");

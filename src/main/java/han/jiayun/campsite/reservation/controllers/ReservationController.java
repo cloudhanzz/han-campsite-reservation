@@ -45,7 +45,7 @@ public class ReservationController {
 	@GetMapping("/available/dates")
 	@ApiOperation(value = "Find available dates of a range", response = FromTo.class, responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"),
-			@ApiResponse(code = 406, message = "Invalid date range"),
+			@ApiResponse(code = 422, message = "Invalid date range"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public List<FromTo> getAvailableDates(
 			@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Optional<LocalDate> from,
@@ -56,9 +56,9 @@ public class ReservationController {
 	@PostMapping
 	@ApiOperation(value = "Create a new reservation", response = ResponseEntity.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Created"),
-			@ApiResponse(code = 406, message = "Not Acceptable request body, such as arrival date is not after the departure date"),
+			@ApiResponse(code = 400, message = "Missing required value(s)"),
 			@ApiResponse(code = 409, message = "Conflict: the attempted dates not available"),
-			@ApiResponse(code = 422, message = "Missing required value(s)"),
+			@ApiResponse(code = 422, message = "Not Acceptable request body, such as arrival date is not after the departure date"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<CreationResponse> makeReservation(@RequestBody RequestedReservation request) {
 
@@ -85,7 +85,7 @@ public class ReservationController {
 	@DeleteMapping("/{id}")
 	@ApiOperation(value = "Cancel a reservation", response = ResponseEntity.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success with no content"),
-			@ApiResponse(code = 404, message = "Reservation"),
+			@ApiResponse(code = 404, message = "Reservation not found"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<?> cancelReservation(@PathVariable String id) {
 		reservationService.cancelReservation(id);
@@ -95,9 +95,9 @@ public class ReservationController {
 	@PatchMapping("/{id}")
 	@ApiOperation(value = "Update the reservation with the provided details. Not-mentioned aspects won't be modified", response = ResponseEntity.class)
 	@ApiResponses(value = { @ApiResponse(code = 204, message = "Success with no content"),
+			@ApiResponse(code = 400, message = "Missing required value(s)"),
 			@ApiResponse(code = 404, message = "Reservation not found"),
-			@ApiResponse(code = 406, message = "Not Acceptable request body, such as arrival date is not after the departure date"),
-			@ApiResponse(code = 422, message = "Missing required value(s)"),
+			@ApiResponse(code = 422, message = "Not Acceptable request body, such as arrival date is not after the departure date"),
 			@ApiResponse(code = 500, message = "Server failed to perform the operation") })
 	public ResponseEntity<ConfirmedReservation> modifyReservation(@PathVariable String id, @RequestBody RequestedReservation request) {
 		ConfirmedReservation reservation = reservationService.modifyReservation(id, request);

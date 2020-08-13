@@ -21,8 +21,6 @@ import lombok.Setter;
 public class ConfirmedReservation extends RequestedReservation {
 
 	private String id;
-	private UserInfo user;	
-	private Schedule dates;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime reservedAt;

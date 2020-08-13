@@ -33,7 +33,7 @@ Create REST application to expose endpoints for:
  - To run the application using maven: `mvn spring-boot:run`
  - To run it from within IDE: the entry class is: `han.jiayun.campsite.reservation.Application`
  - To run the tests from maven: `mvn clean test` while the recommended way is to use IDE as it brings up more detailed test information.
- - After the application is running (and if you run it locally with the default port), you can see its full API definition using [Swagger UI at: ](http://http://localhost:9999/swagger-ui.html#/) http://localhost:9999/swagger-ui.html#/.
+ - After the application is running (and if you run it locally with the default port), you can see its full API definition using [Swagger UI at: ](http://localhost:9999/swagger-ui.html#/reservation45controller) http://localhost:9999/swagger-ui.html#/reservation45controller.
  
 ### Quality Assurance
 

@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
  * @author Jiayun Han
  *
  */
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class InvalidRequestBodyException extends RestException {
 
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,6 @@ public class InvalidRequestBodyException extends RestException {
 	 * @param message
 	 */
 	public InvalidRequestBodyException(String message) {
-		super(message, HttpStatus.NOT_ACCEPTABLE, NOTE);
+		super(message, HttpStatus.BAD_REQUEST, NOTE);
 	}
 }
